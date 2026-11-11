@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TỔNG HỢP LIÊN KẾT NỘI DUNG NGIÊN CỨU (TL_1 - TL_18)</title>
+    <style>
+        :root {
+            --bg-color: #050515;
+            --card-bg: rgba(20, 24, 50, 0.65);
+            --card-hover-bg: rgba(30, 40, 80, 0.8);
+            --border-glow: rgba(100, 200, 255, 0.25);
+            --border-hover: rgba(0, 240, 255, 0.7);
+            --gold-accent: #ffd700;
+            --cyan-accent: #00f0ff;
+            --purple-accent: #b026ff;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            padding: 50px 20px;
+        }
+
+        /* Dynamic Starfield Background */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            overflow: hidden;
+        }
+
+        .stars {
+            width: 1px;
+            height: 1px;
+            background: transparent;
+            box-shadow: 
+                120px 300px #fff, 450px 100px #fff, 800px 400px #fff, 200px 700px #fff,
+                1100px 200px #fff, 1400px 600px #fff, 900px 800px #fff, 300px 1100px #fff,
+                150px 1400px #fff, 700px 1200px #fff, 1300px 1000px #fff, 500px 1500px #fff,
+                100px 50px #00f0ff, 600px 350px #ffd700, 1000px 900px #b026ff;
+            animation: animateStars 50s linear infinite;
+        }
+
+        .nebula {
+            position: fixed;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .nebula-1 { top: -150px; left: -150px; background: var(--purple-accent); }
+        .nebula-2 { bottom: -150px; right: -150px; background: var(--cyan-accent); }
+
+        @keyframes animateStars {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-1000px); }
+        }
+
+        /* Container Layout */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* Header Area */
+        .header-box {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .main-title {
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.6), 0 0 40px rgba(176, 38, 255, 0.4);
+        }
+
+        .sub-title {
+            font-size: 1.1rem;
+            color: var(--cyan-accent);
+            letter-spacing: 1px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .divider {
+            width: 140px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cyan-accent), var(--gold-accent), transparent);
+            margin: 25px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Responsive Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 22px;
+            margin-top: 20px;
+        }
+
+        /* Card Item */
+        .tl-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glow);
+            border-radius: 14px;
+            padding: 24px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tl-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cyan-accent), var(--purple-accent));
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .tl-card:hover {
+            transform: translateY(-6px);
+            background: var(--card-hover-bg);
+            border-color: var(--border-hover);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.25), 0 0 15px rgba(176, 38, 255, 0.2);
+        }
+
+        .tl-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gold-accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-tag::before {
+            content: "✦";
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .card-url {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            word-break: break-all;
+            margin-bottom: 20px;
+            font-family: monospace;
+        }
+
+        .card-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--cyan-accent);
+            transition: gap 0.3s ease;
+        }
+
+        .tl-card:hover .card-action {
+            gap: 12px;
+            color: #ffffff;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-glow);
+            padding-top: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Space Background Elements -->
+    <div class="stars-container">
+        <div class="stars"></div>
+    </div>
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header-box">
+            <h1 class="main-title">HỆ THỐNG LIÊN KẾT NỘI DUNG NGIÊN CỨU</h1>
+            <p class="sub-title">Danh mục 18 chuyên đề tiểu luận triết học so sánh Advaita Vedānta & Thiền học Thích Thanh Từ</p>
+            <div class="divider"></div>
+        </div>
+
+        <!-- Grid of 18 Links -->
+        <div class="grid-container">
+
+            <!-- TL_1 -->
+            <a href="https://lelevietnam99.github.io/TL_1/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 01</div>
+                    <h2 class="card-title">Tài liệu TL_1</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_1/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_2 -->
+            <a href="https://lelevietnam99.github.io/TL_2/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 02</div>
+                    <h2 class="card-title">Tài liệu TL_2</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_2/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_3 -->
+            <a href="https://lelevietnam99.github.io/TL_3/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 03</div>
+                    <h2 class="card-title">Tài liệu TL_3</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_3/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_4 -->
+            <a href="https://lelevietnam99.github.io/TL_4/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 04</div>
+                    <h2 class="card-title">Tài liệu TL_4</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_4/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_5 -->
+            <a href="https://lelevietnam99.github.io/TL_5/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 05</div>
+                    <h2 class="card-title">Tài liệu TL_5</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_5/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_6 -->
+            <a href="https://lelevietnam99.github.io/TL_6/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 06</div>
+                    <h2 class="card-title">Tài liệu TL_6</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_6/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_7 -->
+            <a href="https://lelevietnam99.github.io/TL_7/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 07</div>
+                    <h2 class="card-title">Tài liệu TL_7</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_7/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_8 -->
+            <a href="https://lelevietnam99.github.io/TL_8/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 08</div>
+                    <h2 class="card-title">Tài liệu TL_8</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_8/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_9 -->
+            <a href="https://lelevietnam99.github.io/TL_9/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 09</div>
+                    <h2 class="card-title">Tài liệu TL_9</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_9/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_10 -->
+            <a href="https://lelevietnam99.github.io/TL_10/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 10</div>
+                    <h2 class="card-title">Tài liệu TL_10</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_10/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_11 -->
+            <a href="https://lelevietnam99.github.io/TL_11/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 11</div>
+                    <h2 class="card-title">Tài liệu TL_11</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_11/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_12 -->
+            <a href="https://lelevietnam99.github.io/TL_12/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 12</div>
+                    <h2 class="card-title">Tài liệu TL_12</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_12/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_13 -->
+            <a href="https://lelevietnam99.github.io/TL_13/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 13</div>
+                    <h2 class="card-title">Tài liệu TL_13</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_13/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_14 -->
+            <a href="https://lelevietnam99.github.io/TL_14/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 14</div>
+                    <h2 class="card-title">Tài liệu TL_14</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_14/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_15 -->
+            <a href="https://lelevietnam99.github.io/TL_15/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 15</div>
+                    <h2 class="card-title">Tài liệu TL_15</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_15/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_16 -->
+            <a href="https://lelevietnam99.github.io/TL_16/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 16</div>
+                    <h2 class="card-title">Tài liệu TL_16</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_16/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_17 -->
+            <a href="https://lelevietnam99.github.io/TL_17/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 17</div>
+                    <h2 class="card-title">Tài liệu TL_17</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_17/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+            <!-- TL_18 -->
+            <a href="https://lelevietnam99.github.io/TL_18/" target="_blank" rel="noopener noreferrer" class="tl-card">
+                <div>
+                    <div class="card-tag">Chuyên đề 18</div>
+                    <h2 class="card-title">Tài liệu TL_18</h2>
+                    <div class="card-url">lelevietnam99.github.io/TL_18/</div>
+                </div>
+                <div class="card-action">
+                    <span>Truy cập trang</span>
+                    <span>➔</span>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© Danh mục Tổng hợp Liên kết Tiểu luận Triết học | GitHub Pages Portal</p>
+        </div>
+    </div>
+
+</body>
+</html>
